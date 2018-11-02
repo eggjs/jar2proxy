@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="facade" default="build" basedir="./">
+  <property name="src.dir" value="src"/>
+  <property name="dest" value="classes"/>
+  <property name="jarname" value="./target/facade.jar"/>
+  <property name="sources.jarname" value="./target/facade-sources.jar"/>
+  <path id="classpath">
+    <pathelement location="${dest}"/>
+    <!-- <pathelement path="../bin/libs/fastjson-1.2.48.jar"/> -->
+  </path>
+  <target name="init">
+    <mkdir dir="${dest}"/>
+  </target>
+  <target name="clean">
+    <delete dir="${dest}" />
+    <delete file="${jarname}" />
+  </target>
+  <target name="compile" depends="init">
+    <javac target="1.6" includeantruntime="true" srcdir="${src.dir}" destdir="${dest}" debug="on" encoding="UTF-8">
+      <classpath refid="classpath"/>
+    </javac>
+  </target>
+  <target name="build" depends="clean,compile">
+    <jar jarfile="${jarname}" basedir="${dest}"/>
+    <jar jarfile="${sources.jarname}" basedir="${src.dir}/main/java">
+      <include name="**/*.java"/>
+    </jar>
+  </target>
+</project>

@@ -1,0 +1,6 @@
+{
+  "name": "egg-proxy-demo",
+  "eggPlugin": {
+    "name": "proxyDemo"
+  }
+}

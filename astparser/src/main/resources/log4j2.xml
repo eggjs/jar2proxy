@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="jarproxy" packages="com.ali.jar2proxy">
+  <Appenders>
+    <File name="File" fileName="logs/jar2proxy-astparser.log">
+      <PatternLayout>
+        <Pattern>%d %p %c{36} [%t] %M %m%n</Pattern>
+      </PatternLayout>
+    </File>
+  </Appenders>
+  <Loggers>
+    <Root level="debug">
+      <AppenderRef ref="File"/>
+    </Root>
+  </Loggers>
+</Configuration>

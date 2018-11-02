@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="astparser" default="build" basedir="./">
+  <property name="src.dir" value="src"/>
+  <property name="resource.dir" value="${src.dir}/main/resources"/>
+  <property name="dest" value="classes"/>
+  <property name="libs.jar" value="../"/>
+  <property name="jarname" value="../bin/libs/astparser.jar"/>
+  <path id="classpath">
+    <pathelement location="${dest}"/>
+    <pathelement path="../bin/libs/fastjson-1.2.48.jar"/>
+    <pathelement path="../bin/libs/log4j-api-2.11.1.jar"/>
+    <pathelement path="../bin/libs/log4j-core-2.11.1.jar"/>
+  </path>
+  <target name="init">
+     <mkdir dir="${dest}"/>
+  </target>
+  <target name="clean">
+     <delete dir="${dest}" />
+     <delete file="${jarname}" />
+  </target>
+  <target name="compile" depends="init">
+     <copy todir="${dest}" overwrite="true">
+       <fileset dir="${resource.dir}" includes="log4j2.xml"/>
+     </copy>
+     <javac source="1.6" target="1.6" includeantruntime="true" srcdir="${src.dir}" destdir="${dest}" debug="on" encoding="UTF-8">
+        <classpath refid="classpath"/>
+     </javac>
+  </target>
+  <target name="build" depends="clean,compile">
+     <jar jarfile="${jarname}" basedir="${dest}"/>
+  </target>
+</project>
