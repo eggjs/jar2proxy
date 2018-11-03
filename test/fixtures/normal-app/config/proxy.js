@@ -13,6 +13,7 @@ module.exports = {
       api: {
         userFacade: {
           interfaceName: 'com.ali.jar2proxy.normal.facade.UserFacade',
+          responseTimeout: 1001,
         },
         topicConcernFacade: {
           interfaceName: 'com.ali.jar2proxy.generic.facade.TopicConcernFacade',

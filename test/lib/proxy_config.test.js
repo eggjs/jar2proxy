@@ -20,9 +20,17 @@ describe('test/lib/proxy_config.test.js', function() {
       proxyConfigPath,
       logger,
     });
+    logger.flush();
     const config = proxyConfig.readConfig();
     assert(Array.isArray(config.dependencies));
     assert(config.dependencies.length === 3);
+    assert(config.proxyList.length === 2);
+    const apiConfigB = config.proxyList.find(item => item.proxyName === 'facadeNameB1');
+    assert(apiConfigB.version === 'version-b1-1'); // api config
+    const apiConfigA = config.proxyList.find(item => item.proxyName === 'facadeName');
+    assert(apiConfigA.version === 'version-a1'); // proxy app config
+    assert(apiConfigA.port === 12200); // default config
+    assert(apiConfigA.group === 'DUBBO'); // egg app config
     const logPath = logger.getPath('info');
     const logStr = fs.readFileSync(logPath, 'utf-8');
     assert(logStr.includes('getPlugins failed.'));

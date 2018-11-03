@@ -1,9 +1,11 @@
 'use strict';
 
 module.exports = {
+  group: 'DUBBO',
   services: [
     {
       appName: 'app-a1',
+      version: 'version-a1',
       api: {
         facadeName: 'com.*.*.FacadeName',
       },
@@ -22,8 +24,12 @@ module.exports = {
     },
     {
       appName: 'app-b1',
+      version: 'version-b1',
       api: {
-        facadeNameB1: 'com.*.*.FacadeNameB1',
+        facadeNameB1: {
+          interfaceName: 'com.*.*.FacadeNameB1',
+          version: 'version-b1-1',
+        },
       },
       dependency: [
         {
