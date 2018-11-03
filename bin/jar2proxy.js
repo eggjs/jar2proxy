@@ -15,7 +15,7 @@ program
 
 const opts = {
   baseDir: program.base,
-  defaultTpl: program.tpl,
+  tpl: program.tpl,
   proxyConfigPath: program.config,
   isProduction: process.env.NODE_ENV === 'production',
 };

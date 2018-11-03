@@ -54,12 +54,25 @@ module.exports = {
   eggFramework: 'egg',
   directoryToJar: path.join(__dirname, '../libs'),
   mavenRepository: null,
-  group: 'SOFA',
+  group: 'HSF',
+  version: '1.0',
+  uniqueId: 'uniqueId',
+  tpl: 'proxy.js.tpl',
+  method: {},
+  responseTimeout: 1000,
   services: [
     {
       appName: 'jar2proxy',
       api: {
-        UserFacade: 'com.ali.jar2proxy.normal.facade.UserFacade',
+        UserFacade: {
+          interfaceName: 'com.ali.jar2proxy.normal.facade.UserFacade',
+          group: 'HSF',
+          version: '1.0',
+          uniqueId: 'uniqueId',
+          tpl: 'proxy.js.tpl',
+          method: {},
+          responseTimeout: 1000,
+        },
       },
       dependency: [
         {
