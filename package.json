@@ -19,7 +19,8 @@
     "test": "npm run build && egg-bin test",
     "cov": "egg-bin cov",
     "build": "./node_modules/mirant/bin/ant -f astparser/build.xml",
-    "autod": "autod"
+    "autod": "autod",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "cassandra-map": "^0.1.7",
