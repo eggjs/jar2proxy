@@ -1,7 +1,10 @@
 'use strict';
 
+const path = require('path');
+
 module.exports = {
   group: 'DUBBO',
+  tpl: path.join(__dirname, './proxy-demo.js.tpl'),
   services: [
     {
       appName: 'app-a1',

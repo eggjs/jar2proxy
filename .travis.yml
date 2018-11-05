@@ -1,0 +1,20 @@
+sudo: false
+os:
+  - linux
+  - osx
+  - windows
+language: node_js
+# language: java
+# jdk:
+#   - oraclejdk8
+node_js:
+  - '8'
+  - '10'
+# before_install:
+#   - sudo apt-get install oracle-java8-set-default
+install:
+  - npm i npminstall && npminstall
+script:
+  - npm run ci
+after_success:
+  - npminstall codecov && codecov --disable=gcov -f .nyc_output/*.json

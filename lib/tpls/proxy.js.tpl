@@ -13,9 +13,8 @@ module.exports = function (app) {
     version = app.config.proxy.envVersion[appName] || version;
   }
   const serviceId = `{{ proxyProfile.canonicalName }}:${version}{%- if uniqueId %}:{{ uniqueId }}{%- endif %}`;
-  const rpcClient = app.trClient || app.hsfClient;
-  if (!rpcClient) return;
-  const consumer = rpcClient.createConsumer({
+  if (!app.rpcClient) return;
+  const consumer = app.rpcClient.createConsumer({
     id: serviceId,
     appName,
     targetAppName: appName,
@@ -64,8 +63,7 @@ module.exports = function (app) {
         }{%- if loop.last != true %},{%- endif %}
         {%- endfor %}
       ];
-      this.proxyArgsConvert(args);
-      return await consumer.invokeNew(this.ctx, '{{ item.methodName }}', args, { {%- if item.extConfig.responseTimeout %} responseTimeout: {{ item.extConfig.responseTimeout }}{%- endif %} });
+      return await consumer.invoke(this.ctx, '{{ item.methodName }}', args, { {%- if item.extConfig.responseTimeout %} responseTimeout: {{ item.extConfig.responseTimeout }}{%- endif %} });
     }
   {%- endfor %}
   }
