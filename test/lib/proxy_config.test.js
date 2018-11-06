@@ -20,23 +20,26 @@ describe('test/lib/proxy_config.test.js', function() {
       proxyConfigPath,
       logger,
     });
-    logger.flush();
     const config = proxyConfig.readConfig();
+    logger.flush();
+    await this.wait(300);
     assert(Array.isArray(config.dependencies));
     assert(config.dependencies.length === 3);
     assert(config.proxyList.length === 2);
+    // command args => proxy config => app config => api config
     const apiConfigB = config.proxyList.find(item => item.proxyName === 'facadeNameB1');
-    assert(apiConfigB.version === 'version-b1-1'); // api config
+    assert(apiConfigB.version === 'version-b1-1', 'should use api config value');
     const apiConfigA = config.proxyList.find(item => item.proxyName === 'facadeName');
-    assert(apiConfigA.version === 'version-a1'); // proxy app config
-    assert(apiConfigA.port === 12200); // default config
-    assert(apiConfigA.group === 'DUBBO'); // egg app config
+    assert(apiConfigA.version === 'version-a1', 'should use proxy app config value');
+    assert(apiConfigA.port === 12200, 'should use default config value');
+    assert(apiConfigA.group === 'DUBBO', 'should use egg app config value');
+    assert(/proxy\-demo\.js\.tpl$/.test(apiConfigA.tpl), 'should use proxy config value');
     const logPath = logger.getPath('info');
     const logStr = fs.readFileSync(logPath, 'utf-8');
     assert(logStr.includes('getPlugins failed.'));
   });
 
-  it('merge plugin proxy config should ok', function() {
+  it('merge plugin proxy config should ok', async function() {
     const baseDir = path.join(__dirname, '../fixtures/plugin-proxy-config-app');
     const proxyConfigPath = path.join(baseDir, 'config/proxy.js');
     this.prepareApp(baseDir);
@@ -52,6 +55,8 @@ describe('test/lib/proxy_config.test.js', function() {
       logger,
     });
     const config = proxyConfig.readConfig();
+    logger.flush();
+    await this.wait(300);
     assert(config.dependencies.length === 7);
     assert(config.dependencies.filter(item => item.__fromPlugin).length === 3);
     assert(config.services.length === 3);

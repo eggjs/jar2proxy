@@ -17,10 +17,12 @@
   ],
   "scripts": {
     "test": "npm run build && egg-bin test",
-    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "cov": "npm run build && egg-bin cov",
+    "ci": "npm run lint && npm run cov",
     "build": "./node_modules/mirant/bin/ant -f astparser/build.xml",
     "autod": "autod",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "cassandra-map": "^0.1.7",
