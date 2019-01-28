@@ -146,6 +146,22 @@ describe('test/astparser/astparser.test.js', () => {
     });
   });
 
+  describe('com.ali.jar2proxy.generic.enums.GetNameCase', () => {
+    let clz;
+    before(() => {
+      clz = enumMap['com.ali.jar2proxy.generic.enums.GetNameCase'];
+    });
+    it('enum GET_NAME_CASE should ok', () => {
+      const field = clz.fields.find(item => item.fieldName === 'GET_NAME_CASE');
+      assert(field.commentText === '');
+      assert(field.fieldName === 'GET_NAME_CASE');
+      assert(field.canonicalName === 'com.ali.jar2proxy.generic.enums.GetNameCase');
+      assert(field.enumValue.$name === 'GET_NAME_CASE');
+      assert(field.enumValue.name === 'n');
+      assert(field.enumValue.code === 'c');
+    });
+  });
+
   describe('com.ali.jar2proxy.normal.facade.UserFacade', () => {
     let clz;
     before(() => {
