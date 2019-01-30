@@ -13,6 +13,7 @@ describe('test/astparser/astparser.test.js', () => {
   let classMap;
   let enumMap;
   let proxyMap;
+  let declareMap;
 
   before(() => {
     const tmpSourceDir = join(os.tmpdir(), Date.now().toString());
@@ -41,6 +42,7 @@ describe('test/astparser/astparser.test.js', () => {
     classMap = astJson.classMap;
     enumMap = astJson.enumMap;
     proxyMap = astJson.proxyMap;
+    declareMap = astJson.declareMap;
   });
 
   describe('com.ali.jar2proxy.generic.model.TMgetPopCountRequest', () => {
@@ -226,6 +228,29 @@ describe('test/astparser/astparser.test.js', () => {
       assert(method.params[0].generic[1].arrayDepth === 1);
       assert(method.raw === ' public UserInfo queryUserInfoByGeneric(Map<Integer, String[]> inputProps);');
       assert(method.returnType.canonicalName === 'com.ali.jar2proxy.normal.model.UserInfo');
+    });
+
+  });
+
+  describe('declareMap', () => {
+
+    it('com.ali.jar2proxy.extend.model.UserConsultRequest', () => {
+      const declareList = declareMap['com.ali.jar2proxy.extend.model.UserConsultRequest'];
+      assert(declareList.length === 1);
+      assert.equal(declareList[0], 'com.ali.jar2proxy.extend.model.UccUserCalcConsultRequest');
+    });
+
+    it('com.ali.jar2proxy.extend.model.PayToolConsultRequest', () => {
+      const declareList = declareMap['com.ali.jar2proxy.extend.model.PayToolConsultRequest'];
+      assert(declareList.length === 3);
+      const list = [
+        'com.ali.jar2proxy.extend.model.UserConsultRequest',
+        'com.ali.jar2proxy.extend.model.UccUserCalcConsultRequest',
+        'com.ali.jar2proxy.extend.model.PayToolBaseConsultRequest',
+      ];
+      list.forEach(item => {
+        assert(declareList.includes(item));
+      });
     });
 
   });

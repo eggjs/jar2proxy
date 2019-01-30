@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ParserOutput {
@@ -12,6 +13,7 @@ public class ParserOutput {
   private Map<String, Object> proxyMap = new HashMap<String, Object>();
   private Map<String, Object> enumMap = new HashMap<String, Object>();
   private Map<String, Object> classMap = new HashMap<String, Object>();
+  private Map<String, List<String>> declareMap = new HashMap<String, List<String>>();
 
   public void addProxy(String name, DescriptionParser parser) {
     if (!this.proxyMap.containsKey(name)) {
@@ -76,6 +78,14 @@ public class ParserOutput {
 
   public void setClassMap(Map<String, Object> classMap) {
     this.classMap = classMap;
+  }
+
+  public Map<String, List<String>> getDeclareMap() {
+    return declareMap;
+  }
+
+  public void setDeclareMap(Map<String, List<String>> declareMap) {
+    this.declareMap = declareMap;
   }
 
   public interface DescriptionParser {

@@ -93,7 +93,7 @@ public class AstParser {
     historyTypeCache.put(qualifiedTypeName, doc);
 
     try {
-      // Bootstap ClassLoader is not extends ClassLoader
+      // Bootstap classLoader is not extends ClassLoader
       // java.lang.String invoke getClassLoader() will return null
       Class clz = Class.forName(qualifiedTypeName);
       if (clz.getClassLoader() == null) {
@@ -166,10 +166,10 @@ public class AstParser {
           if ("java.io.Serializable".equals(typeName)) {
             continue;
           }
-//            if (!profile.getDeclareMap().containsKey(typeName)) {
-//              profile.getDeclareMap().put(typeName, new ArrayList());
-//            }
-//            profile.getDeclareMap().get(typeName).add(qualifiedTypeName);
+          if (!this.output.getDeclareMap().containsKey(typeName)) {
+            this.output.getDeclareMap().put(typeName, new ArrayList());
+          }
+          this.output.getDeclareMap().get(typeName).add(qualifiedTypeName);
         }
       } else {
         logger.debug(qualifiedTypeName + " without implement any interface like java.io.Serializable.");
