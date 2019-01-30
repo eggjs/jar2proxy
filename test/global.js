@@ -3,7 +3,7 @@
 const path = require('path');
 const fs = require('fs');
 const coffee = require('coffee');
-const process = require('child_process');
+// const process = require('child_process');
 const rimraf = require('rimraf');
 const assert = require('assert');
 
@@ -29,9 +29,9 @@ before(function() {
       console.log(err.stack);
     }
     console.log('start install modules.');
-    process.execSync('npm install', {
-      cwd: baseDir,
-    });
+    // process.execSync('npm install', {
+    //   cwd: baseDir,
+    // });
   };
 
   this.jar2proxy = (options, callback) => {

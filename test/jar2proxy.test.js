@@ -7,7 +7,7 @@ const mkdirp = require('mkdirp');
 const assert = require('assert');
 
 describe('test/jar2proxy.test.js', function() {
-  it('jar2proxy bin', function(done) {
+  it.only('jar2proxy bin', function(done) {
     const libspath = path.join(__dirname, './fixtures/normal-app/libs');
     mkdirp.sync(libspath);
     fs.copyFileSync(

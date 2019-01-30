@@ -49,6 +49,14 @@ describe('test/lib/proxy_config.test.js', function() {
       path.join(__dirname, '../fixtures/egg-proxy-demo-plugin'),
       path.join(baseDir, 'node_modules/egg-proxy-demo')
     );
+    fs.copySync(
+      path.join(__dirname, '../fixtures/egg'),
+      path.join(baseDir, 'node_modules/egg')
+    );
+    fs.copySync(
+      path.join(__dirname, '../fixtures/egg-core'),
+      path.join(baseDir, 'node_modules/egg-core')
+    );
     const proxyConfig = new ProxyConfig({
       baseDir,
       proxyConfigPath,
