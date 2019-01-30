@@ -1,4 +1,9 @@
 
+1.0.4 / 2019-01-28
+==================
+
+  * fix: enum field name can not override enum name
+
 1.0.3 / 2018-11-06
 ==================
 

@@ -10,6 +10,10 @@ import java.net.URLClassLoader;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * A Java Enum is a special Java type used to define collections of constants.
+ * @author coolme200
+ */
 public class EnumFiller {
 
   private static Logger logger = LogManager.getLogger();
@@ -21,6 +25,8 @@ public class EnumFiller {
       try {
         Class clz = classLoader.loadClass(desc.getCanonicalName());
         for (EnumElementDescription emf : desc.getFields()) {
+          // Returns the enum constant of the specified enum type with the specified name.
+          // The name must match exactly an identifier used to declare an enum constant in this type.
           Object em = clz.getMethod("valueOf", String.class).invoke(clz, emf.getFieldName());
           for (EnumElementDescription field : desc.getEnumFields()) {
             try {
