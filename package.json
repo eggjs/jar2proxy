@@ -20,7 +20,7 @@
     "lint": "eslint .",
     "cov": "npm run build && egg-bin cov",
     "ci": "npm run lint && npm run cov",
-    "build": "./node_modules/mirant/bin/ant -f astparser/build.xml",
+    "build": "node bin/build.js",
     "autod": "autod",
     "prepublishOnly": "npm run build"
   },

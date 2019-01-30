@@ -3,17 +3,17 @@ os:
   - linux
   - osx
   - windows
+# https://docs.travis-ci.com/user/reference/osx/
+osx_image: xcode9.3
 language: node_js
-# language: java
-# jdk:
-#   - oraclejdk8
 node_js:
   - '8'
   - '10'
-# before_install:
-#   - sudo apt-get install oracle-java8-set-default
 install:
   - npm i npminstall && npminstall
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install jdk8          ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then export PATH=$PATH:"/c/Program Files/Java/jdk1.8.0_201/bin"          ; fi
+  - java -version
 script:
   - npm run ci
 after_success:
