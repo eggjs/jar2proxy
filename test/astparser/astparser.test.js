@@ -153,7 +153,7 @@ describe('test/astparser/astparser.test.js', () => {
     before(() => {
       clz = enumMap['com.ali.jar2proxy.generic.enums.GetNameCase'];
     });
-    it('enum GET_NAME_CASE should ok', () => {
+    it('enum GET_NAME_CASE "name" override "$name" should ok', () => {
       const field = clz.fields.find(item => item.fieldName === 'GET_NAME_CASE');
       assert(field.commentText === '');
       assert(field.fieldName === 'GET_NAME_CASE');
@@ -176,7 +176,7 @@ describe('test/astparser/astparser.test.js', () => {
       assert(method.params.length === 1);
       assert(method.params[0].paramName === 'userId');
       assert(method.params[0].canonicalName === 'java.lang.String');
-      assert(method.raw === ' public UserInfo queryByUserId(String userId);');
+      assert(method.raw.includes(' public UserInfo queryByUserId(String userId);'));
       assert(method.returnType.canonicalName === 'com.ali.jar2proxy.normal.model.UserInfo');
     });
 
@@ -186,7 +186,7 @@ describe('test/astparser/astparser.test.js', () => {
       assert(method.params.length === 1);
       assert(method.params[0].paramName === 'user');
       assert(method.params[0].canonicalName === 'com.ali.jar2proxy.normal.model.UserInfo');
-      assert(method.raw === ' public UserInfo queryByUserId(UserInfo user);');
+      assert(method.raw.includes(' public UserInfo queryByUserId(UserInfo user);'));
       assert(method.returnType.canonicalName === 'com.ali.jar2proxy.normal.model.UserInfo');
     });
 
@@ -198,7 +198,7 @@ describe('test/astparser/astparser.test.js', () => {
       assert(method.params[0].canonicalName === 'java.lang.String');
       assert(method.params[0].isArray === true);
       assert(method.params[0].arrayDepth === 1);
-      assert(method.raw === ' public UserInfo queryByUserIds(String[] userIds);');
+      assert(method.raw.includes(' public UserInfo queryByUserIds(String[] userIds);'));
       assert(method.returnType.canonicalName === 'com.ali.jar2proxy.normal.model.UserInfo');
     });
 
@@ -210,7 +210,7 @@ describe('test/astparser/astparser.test.js', () => {
       assert(method.params[0].canonicalName === 'java.lang.String');
       assert(method.params[0].isArray === true);
       assert(method.params[0].arrayDepth === 2);
-      assert(method.raw === ' public UserInfo queryByUserIds(String[][] userIds);');
+      assert(method.raw.includes(' public UserInfo queryByUserIds(String[][] userIds);'));
       assert(method.returnType.canonicalName === 'com.ali.jar2proxy.normal.model.UserInfo');
       assert(method.isOverloading === true);
     });
@@ -226,7 +226,7 @@ describe('test/astparser/astparser.test.js', () => {
       assert(method.params[0].generic[1].type === 'java.lang.String');
       assert(method.params[0].generic[1].isArray === true);
       assert(method.params[0].generic[1].arrayDepth === 1);
-      assert(method.raw === ' public UserInfo queryUserInfoByGeneric(Map<Integer, String[]> inputProps);');
+      assert(method.raw.includes(' public UserInfo queryUserInfoByGeneric(Map<Integer, String[]> inputProps);'));
       assert(method.returnType.canonicalName === 'com.ali.jar2proxy.normal.model.UserInfo');
     });
 

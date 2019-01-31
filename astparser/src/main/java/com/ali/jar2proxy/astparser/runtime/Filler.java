@@ -29,7 +29,7 @@ public class Filler {
     List<URL> urls = new ArrayList<URL>();
     for (File file : files) {
       if (file.isFile() && file.getName().matches(".*\\.jar$") && !file.getName().matches(".*sources\\.jar$")) {
-        urls.add(new URL("file://" + file.getAbsolutePath()));
+        urls.add(new File(file.getAbsolutePath()).toURI().toURL());
       }
     }
     this.classLoader = new URLClassLoader(urls.toArray(new URL[ urls.size() ]));

@@ -3,6 +3,7 @@
 const { spawnSync } = require('child_process');
 const fs = require('fs');
 const { join } = require('path');
+const os = require('os');
 
 before(() => {
   // prepare all jar for test
@@ -15,7 +16,10 @@ before(() => {
     if (!fs.existsSync(build)) {
       return;
     }
-    const result = spawnSync(join(__dirname, '../../node_modules/mirant/bin/ant'), [ '-f', build ]);
+    const result = spawnSync(
+      join(__dirname, `../../node_modules/mirant/bin/${os.platform() === 'win32' ? 'ant.bat' : 'ant'}`),
+      [ '-f', build ]
+    );
     if (result.error) {
       throw result.error;
     }
